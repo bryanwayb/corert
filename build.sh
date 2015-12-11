@@ -104,7 +104,7 @@ install_dotnet_cli()
         # See https://github.com/dotnet/cli/blob/5f5e3ad74c0c1de7071ba1309dca2ea289691163/scripts/ci_build.sh#L24
         #     https://github.com/dotnet/cli/issues/354
         #
-        if [ -n ${HOME:+1} ]; then
+        if [ -z "${HOME}" ]; then
             export HOME=${__tools_dir}
         fi
     fi
@@ -174,11 +174,7 @@ build_managed_corert()
     __buildproj=$__scriptpath/build.proj
     __buildlog=$__scriptpath/msbuild.$__BuildArch.log
 
-    if [ -n ${ToolchainMilestone:+1} ]; then
-        ToolchainMilestone=testing
-    fi
-
-    MONO29679=1 ReferenceAssemblyRoot=$__referenceassemblyroot mono $__msbuildpath "$__buildproj" /nologo /verbosity:minimal "/fileloggerparameters:Verbosity=normal;LogFile=$__buildlog" /t:Build /p:CleanedTheBuild=$__CleanBuild /p:SkipTests=true /p:TestNugetRuntimeId=$__TestNugetRuntimeId /p:ToolNugetRuntimeId=$__ToolNugetRuntimeId /p:OSEnvironment=Unix /p:OSGroup=$__BuildOS /p:Configuration=$__BuildType /p:Platform=$__BuildArch /p:UseRoslynCompiler=true /p:COMPUTERNAME=$(hostname) /p:USERNAME=$(id -un) /p:ToolchainMilestone=${ToolchainMilestone} $__UnprocessedBuildArgs
+    MONO29679=1 ReferenceAssemblyRoot=$__referenceassemblyroot mono $__msbuildpath "$__buildproj" /nologo /verbosity:minimal "/fileloggerparameters:Verbosity=normal;LogFile=$__buildlog" /t:Build /p:CleanedTheBuild=$__CleanBuild /p:SkipTests=true /p:TestNugetRuntimeId=$__TestNugetRuntimeId /p:ToolNugetRuntimeId=$__ToolNugetRuntimeId /p:OSEnvironment=Unix /p:OSGroup=$__BuildOS /p:Configuration=$__BuildType /p:Platform=$__BuildArch /p:UseRoslynCompiler=true /p:COMPUTERNAME=$(hostname) /p:USERNAME=$(id -un) /p:ToolchainMilestone=${__ToolchainMilestone} $__UnprocessedBuildArgs
     BUILDERRORLEVEL=$?
 
     echo
@@ -243,6 +239,7 @@ __TestNugetRuntimeId=ubuntu.14.04-x64
 __buildmanaged=true
 __buildnative=true
 __dotnetclipath=
+__ToolchainMilestone=testing
 
 # Workaround to enable nuget package restoration work successully on Mono
 export TZ=UTC 
@@ -379,6 +376,10 @@ while [ "$1" != "" ]; do
         -dotnetclipath) 
             shift
             __dotnetclipath=$1
+            ;;
+        -milestone) 
+            shift
+            __ToolchainMilestone=$1
         ;;
         *)
           __UnprocessedBuildArgs="$__UnprocessedBuildArgs $1"
