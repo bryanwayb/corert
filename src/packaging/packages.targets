@@ -66,6 +66,9 @@
             <ILCompilerSdkCppCodegenFiles Include="Native/gc/env/gcenv.structs.h" />
             <ILCompilerSdkCppCodegenFiles Include="Native/Bootstrap/common.h" />
 
+            <!-- ILCompiler.SDK Linker support files -->
+            <ILCompilerSdkLinkerFiles Include="Native/Runtime/exports.txt"/>
+
             <ILCompilerSdkFilesManaged Include="System.Private.CoreLib" />
             <ILCompilerSdkFilesManaged Include="System.Private.DeveloperExperience.Console" />
             <ILCompilerSdkFilesManaged Include="System.Private.Interop" />
@@ -81,10 +84,12 @@
             <ILCompilerSdkBinPlace Include="@(ILCompilerSdkFilesManaged)">
                 <Text><![CDATA[        <file src="../%(Identity).dll" target="runtimes/$(NuPkgRid)/native/sdk/%(Identity).dll" /> ]]></Text>
             </ILCompilerSdkBinPlace>
+            <ILCompilerSdkBinPlace Include="@(ILCompilerSdkLinkerFiles)">
+                <Text><![CDATA[        <file src="../../../../src/%(Identity)" target="runtimes/$(NuPkgRid)/native/sdk/%(Filename)%(Extension)" /> ]]></Text>
+            </ILCompilerSdkBinPlace>
             <ILCompilerSdkBinPlace Include="@(ILCompilerSdkCppCodegenFiles)">
                 <Text><![CDATA[        <file src="../../../../src/%(Identity)" target="runtimes/$(NuPkgRid)/native/inc/%(Filename)%(Extension)" /> ]]></Text>
             </ILCompilerSdkBinPlace>
-            
             <!-- ILCompiler nuspec file -->
             <NuSpecFile Include="$(ToolchainPackageName)">
                 <Stage>0</Stage>

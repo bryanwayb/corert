@@ -144,7 +144,7 @@ COOP_PINVOKE_HELPER(Array *, RhpNewArray, (EEType * pArrayEEType, int numElement
     Array * pObject;
 
     // TODO: Overflow checks
-    size_t size = 3 * sizeof(UIntNative) + (numElements * pArrayEEType->get_ComponentSize());
+    size_t size = pArrayEEType->get_BaseSize() + (numElements * pArrayEEType->get_ComponentSize());
     // Align up
     size = (size + (sizeof(UIntNative) - 1)) & ~(sizeof(UIntNative) - 1);
 

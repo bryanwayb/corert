@@ -123,4 +123,3 @@ private:
 };
 
 MSVC_RESTORE_WARNING_STATE()
-

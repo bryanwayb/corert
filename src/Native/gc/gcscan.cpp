@@ -323,4 +323,6 @@ void CNameSpace::VerifyHandleTable(int condemned, int max_gen, ScanContext* sc)
     Ref_VerifyHandleTable(condemned, max_gen, sc);
 }
 
+extern const GCDebugContract g_GCDebugContract = {};
+
 #endif // !DACCESS_COMPILE

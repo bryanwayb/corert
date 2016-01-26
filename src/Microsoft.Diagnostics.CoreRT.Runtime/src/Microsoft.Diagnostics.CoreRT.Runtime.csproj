@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), dir.props))\dir.props" />
+  <PropertyGroup>
+    <AssemblyName>Microsoft.Diagnostics.CoreRT.Runtime</AssemblyName>
+    <RootNamespace>Microsoft.Diagnostics.CoreRT</RootNamespace>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <OutputType>Library</OutputType>
+    <ProjectGuid>{6E0E2509-11AC-4B2B-A5C3-5E1C21AE5EB7}</ProjectGuid>
+  </PropertyGroup>
+  <!-- Default configurations to help VS understand the options -->
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'" />
+  <ItemGroup>
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BadInputFormatException.cs" />
+    <Compile Include="DataTarget.cs" />
+    <Compile Include="DataTargetReader.cs" />
+    <Compile Include="DebugContractBase.cs" />
+    <Compile Include="ObjectDebugContract.cs" />
+    <Compile Include="GCHeapEnumerator.cs" />
+    <Compile Include="GCWksDebugContract.cs" />
+    <Compile Include="IDataTarget.cs" />
+    <Compile Include="Runtime.cs" />
+    <Compile Include="GCHeap.cs" />
+    <Compile Include="GCDebugContract.cs" />
+    <Compile Include="ThreadDebugContract.cs" />
+    <Compile Include="EETypeDebugContract.cs" />
+    <Compile Include="ThreadStoreDebugContract.cs" />
+    <Compile Include="RuntimeInstanceDebugContract.cs" />
+  </ItemGroup>
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), dir.targets))\dir.targets" />
+</Project>

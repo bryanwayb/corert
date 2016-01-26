@@ -2699,6 +2699,8 @@ SPTR_IMPL_NS_INIT(CFinalize, WKS, gc_heap, finalize_queue, 0);
 
 /* end of per heap static initialization */
 
+extern const gc_flavor_debug_contract g_gc_flavor_debug_contract = {};
+
 /* end of static initialization */
 
 #ifndef DACCESS_COMPILE

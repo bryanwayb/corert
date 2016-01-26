@@ -188,6 +188,7 @@ class EEType
     friend class MdilModule;
     friend class MetaDataEngine;
     friend class LimitedEEType;
+	friend struct EETypeDebugContract;
 
 #ifdef RHDUMP
 public:

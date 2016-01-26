@@ -2,6 +2,7 @@ set(COMMON_RUNTIME_SOURCES
     allocheap.cpp
     assert.cpp
     Crst.cpp
+    DebugHeader.cpp
     DebugEventSource.cpp
     dllmain.cpp
     eetype.cpp

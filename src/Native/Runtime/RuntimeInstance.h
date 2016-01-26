@@ -23,6 +23,7 @@ class RuntimeInstance
     friend class AsmOffsets;
     friend struct DefaultSListTraits<RuntimeInstance>;
     friend class Thread;
+	friend struct RuntimeInstanceDebugContract;
 
     PTR_RuntimeInstance         m_pNext;
     PTR_ThreadStore             m_pThreadStore;
@@ -222,5 +223,4 @@ PTR_RuntimeInstance GetRuntimeInstance();
 #define END_FOREACH_MODULE  \
     }                       \
 }                           \
-
 
